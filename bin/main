@@ -1,28 +1,37 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-# Parameters
+# Conditions
 
-# testing offenses against a test report
+ERROR = [{ js: 'Layer out of layer.control in line' },
+         { html: 'Content inside script detected.
+            Add src to script tag and relocate code.
+            Example: /js/script_relocated.js' }].freeze
 
-existing_offenses = {
-    {"Offense": "Error"} : {
-        "JS file Error": "Layer out of layer.control in line X",
-        "HTML Error": "Content inside script detected. Please add src attribute to HTML tag and relocate JS content inside another file. Example: /js/script_relocated.js"
-            },
-    {"Offense": "Warning"} : { "JS/JSON/GEOJSON file Warning": "The file is bigger than 5mb. Compression suggested. Try https://mapshaper.org/"}
-}
+WARNING = 'The file is bigger than 5mb. Compression suggested. Try https://mapshaper.org/'
 
-test_report = { "Files inspected":0,"Offenses":0, "Path": ["array of paths"], "Warning": nil, "Error": nil}
+# Test example
 
-# interface output
+no_offenses_report = [{ 'Files inspected': 3 },
+               { 'Offenses': 2 },
+               { 'Path': 'index.html' },
+               { 'Warning': 0 },
+               { 'Error': 0 }]
 
-offenses_found = interface.new "#{files_counter} inspected. #{offenses_counter} offenses detected.\n
-                                #{path}: #{error_line}: #{existing_offenses[Offense]}" # use another method to do this
+def offense_details(offense)
+    offense_details = []
+    total_offenses = 0
+    if offense
+        offense_details << String.new "#{path}: #{line_row}: #{ERROR}"
+end
 
-sucess = "#{files_counter} inspected. No offense detected."
-
-if test_report["Warning"] != nil || test_report["Error"] != nil
-    p offenses_found
-else p sucess
+def final_report(report)
+    case report
+    when report[3]['Warning'] = 0 && report[4]['Error'] = 0
+        p "Inspecting #{report[0]['Files inspected']} files"
+        p 'No offenses detected'
+    when report[3]['Warning'] > 0 || report[4]['Error'] > 0
+        p "Inspecting #{report[0]['Files inspected']} files"
+        p "#{total_offenses} detected"
+        p offense_details.each
 end
