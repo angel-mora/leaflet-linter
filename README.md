@@ -154,3 +154,25 @@ end
 start = Object.new file.Offenses
 
 interface(start)
+
+
+###########3
+
+# interface output
+
+# offenses_found = interface.new "#{files_counter} inspected. #{offenses_counter} offenses detected.\n
+#                                 #{path}: #{error_line}: #{existing_offenses[Offense]}" # use another method to do this
+
+# sucess = "#{files_counter} inspected. No offense detected."
+
+# if test_report["Warning"] != nil || test_report["Error"] != nil
+#     p offenses_found
+# else p sucess
+# end
+
+def offense_details(offense)
+    offenses_details = []
+    total_offenses = 0
+    if offense
+        offenses_details << String.new "#{path}: #{line_row}: #{ERROR}"
+end

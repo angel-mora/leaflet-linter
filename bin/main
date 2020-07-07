@@ -12,26 +12,32 @@ WARNING = 'The file is bigger than 5mb. Compression suggested. Try https://mapsh
 
 # Test example
 
-no_offenses_report = [{ 'Files inspected': 3 },
-               { 'Offenses': 2 },
-               { 'Path': 'index.html' },
-               { 'Warning': 0 },
-               { 'Error': 0 }]
+success_report = [{ files_inspected: 3 },
+                  { total_offenses: 2 },
+                  { path: 'index.html' },
+                  { warning: 0 },
+                  { error: 0 },
+                  { offenses_details: nil }]
 
-def offense_details(offense)
-    offense_details = []
-    total_offenses = 0
-    if offense
-        offense_details << String.new "#{path}: #{line_row}: #{ERROR}"
+all_offenses_report = [{ files_inspected: 5 },
+                       { total_offenses: 3 },
+                       { path: 'index.html' },
+                       { warning: 1 },
+                       { error: 2 },
+                       { offenses_details: nil }]
+
+def final_report(report) # rubocop:disable Metrics/AbcSize
+  if report[3][:warning].zero? && report[4][:error].zero?
+    p "Inspecting #{report[0][:files_inspected]} files"
+    p 'No offenses detected'
+  elsif report[3][:warning].positive? || report[4][:error].positive?
+    p "Inspecting #{report[0][:files_inspected]} files"
+    p "#{report[1][:total_offenses]} offenses detected"
+    # for later p offense_details.each
+  elsif report[0][:files_inspected].zero?
+    p 'Please add some files'
+  end
 end
 
-def final_report(report)
-    case report
-    when report[3]['Warning'] = 0 && report[4]['Error'] = 0
-        p "Inspecting #{report[0]['Files inspected']} files"
-        p 'No offenses detected'
-    when report[3]['Warning'] > 0 || report[4]['Error'] > 0
-        p "Inspecting #{report[0]['Files inspected']} files"
-        p "#{total_offenses} detected"
-        p offense_details.each
-end
+final_report(success_report)
+final_report(all_offenses_report)
