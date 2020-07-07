@@ -142,7 +142,9 @@ Class Report
 main.rb
 
 Class Interface
-    # display :report in terminal
+    :report
+    p report
+end    
 
 start = Object.new file.Offenses
 

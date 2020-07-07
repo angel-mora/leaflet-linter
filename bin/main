@@ -1,4 +1,27 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-p 'Hello world'
+# testing offenses against a test report
+
+existing_offenses = {
+    "Offense": "Error" : {
+        "JS file Error": "Layer out of layer.control in line X",
+        "HTML Error": "Content inside script detected. Please add src attribute to HTML tag and relocate JS content inside another file. Example: /js/script_relocated.js"
+            },
+               "Warning" : {    
+        "JS/JSON/GEOJSON file Warning": "The file is bigger than 5mb. Compression suggested. Try https://mapshaper.org/"}
+}
+
+test_report = { "Files inspected":0,"Offenses":0, "Path": ["array of paths"], "Warning": nil, "Error": nil}
+
+# interface output
+
+offenses_found = interface.new "#{files_counter} inspected. #{offenses_counter} offenses detected.\n
+                                #{path}: #{error_line}: #{existing_offenses[Offense]}" # use another method to do this
+
+sucess = "#{files_counter} inspected. No offense detected."
+
+if test_report["Warning"] != nil || test_report["Error"] != nil
+    p offenses_found
+else p sucess
+end
