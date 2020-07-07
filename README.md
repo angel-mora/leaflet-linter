@@ -1,16 +1,21 @@
-# Project Name
+# Leaflet Linter
 
-> One paragraph statement about the project.
+> Microverse Capstone project. This is a Code Linter developed with Ruby to keep your Leaflet maps out of trouble. Includes tests for HTML, JS, JSON and GEOJSON files to get the most out of this amazing library.
 
-![screenshot](./app_screenshot.png)
+![Leaflet Linter in action](./app_screenshot.png)
 
-Additional description about the project and its features.
+## Main features of this linter
+
+- Identify layers out of layer control
+- Detect javascript inside HTML map page
+- Advise to use compressing tools for maps files
 
 ## Built With
 
-- Major languages,
-- frameworks,
-- technologies used
+- Ruby
+    - Rubocop
+    - Gems:
+- GitHub Actions
 
 ## Live Demo
 
