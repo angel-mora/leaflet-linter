@@ -4,5 +4,5 @@
 require 'colorize'
 require 'colorized_string'
 
-start = Object.new report.Offenses
+start = Iinterface.new report.Offenses
 interface(start)

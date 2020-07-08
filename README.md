@@ -83,3 +83,4 @@ This project is [MIT](lic.url) licensed.
 TO-DO
 
 - Develop ```HTML <script> feature```
+- Inspiration: https://github.com/Dandush03/capstone-build-linter
