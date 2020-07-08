@@ -82,7 +82,4 @@ This project is [MIT](lic.url) licensed.
 
 TO-DO
 
-- Move to logic branch
-- Add Rspec
-- Separate branches
 - Develop ```HTML <script> feature```

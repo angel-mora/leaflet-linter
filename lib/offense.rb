@@ -1,3 +1,10 @@
+ERROR = [{ js: 'Layer out of layer.control in line' },
+         { html: 'Content inside script detected.
+            Add src to script tag and relocate code.
+            Example: /js/script_relocated.js' }].freeze
+
+WARNING = 'The file is bigger than 5mb. Compression suggested. Try https://mapshaper.org/'
+
 Class Offenses
     :report
     define checker
@@ -12,3 +19,11 @@ Class Offenses
                 report[warnings] << existing_offenses["Example kind of warning"]
                 << warning_counter
             else success = True  
+
+
+                def offense_details(offense)
+                    offenses_details = []
+                    total_offenses = 0
+                    if offense
+                        offenses_details << String.new "#{path}: #{line_row}: #{ERROR}"
+                  end #put offense to report                
