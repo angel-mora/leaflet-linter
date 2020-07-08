@@ -176,3 +176,10 @@ def offense_details(offense)
     if offense
         offenses_details << String.new "#{path}: #{line_row}: #{ERROR}"
 end
+
+TO-DO
+
+- Move to logic branch
+- Add Rspec
+- Separate branches
+- Develop ```HTML <script> feature```

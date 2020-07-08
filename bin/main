@@ -1,6 +1,9 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
+require 'colorize'
+require 'colorized_string'
+
 # Conditions
 
 ERROR = [{ js: 'Layer out of layer.control in line' },
@@ -28,14 +31,14 @@ all_offenses_report = [{ files_inspected: 5 },
 
 def final_report(report) # rubocop:disable Metrics/AbcSize
   if report[3][:warning].zero? && report[4][:error].zero?
-    p "Inspecting #{report[0][:files_inspected]} files"
-    p 'No offenses detected'
+    puts "Inspecting #{report[0][:files_inspected]} files"
+    puts 'No offenses '.green + 'detected'
   elsif report[3][:warning].positive? || report[4][:error].positive?
-    p "Inspecting #{report[0][:files_inspected]} files"
-    p "#{report[1][:total_offenses]} offenses detected"
+    puts "Inspecting #{report[0][:files_inspected]} files"
+    puts "#{report[1][:total_offenses]} offenses ".red + 'detected'
     # for later p offense_details.each
   elsif report[0][:files_inspected].zero?
-    p 'Please add some files'
+    puts 'Please add some files'
   end
 end
 
