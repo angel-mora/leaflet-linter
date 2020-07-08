@@ -4,6 +4,16 @@
 require 'colorize'
 require 'colorized_string'
 
+# offenses_found = interface.new "#{files_counter} inspected. #{offenses_counter} offenses detected.\n
+#                                 #{path}: #{error_line}: #{existing_offenses[Offense]}" # use another method to do this
+
+# sucess = "#{files_counter} inspected. No offense detected."
+
+# if test_report["Warning"] != nil || test_report["Error"] != nil
+#     p offenses_found
+# else p sucess
+# end
+
 # Conditions
 
 ERROR = [{ js: 'Layer out of layer.control in line' },
@@ -13,7 +23,16 @@ ERROR = [{ js: 'Layer out of layer.control in line' },
 
 WARNING = 'The file is bigger than 5mb. Compression suggested. Try https://mapshaper.org/'
 
-# Test example
+# Add offense details to report
+
+def offense_details(offense)
+  offenses_details = []
+  total_offenses = 0
+  if offense
+      offenses_details << String.new "#{path}: #{line_row}: #{ERROR}"
+end
+
+# Test example (for Rspec)
 
 success_report = [{ files_inspected: 3 },
                   { total_offenses: 2 },
@@ -44,3 +63,7 @@ end
 
 final_report(success_report)
 final_report(all_offenses_report)
+
+# Only main file code
+start = Object.new file.Offenses
+interface(start)
