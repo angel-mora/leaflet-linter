@@ -5,7 +5,7 @@ ERROR = [{ js: 'Layer out of layer.control in line' },
 
 WARNING = 'The file is bigger than 5mb. Compression suggested. Try https://mapshaper.org/'
 
-Class Offenses
+class Offenses
   attr_writer :report
   def checker
     err_counter = 0

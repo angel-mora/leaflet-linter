@@ -1,8 +1,11 @@
-require_relative 'reader.rb'
+# frozen_string_literal: true
+
+# require_relative 'reader.rb'
 require 'colorize'
 require 'colorized_string'
 
-Class Interface
+# Print report to console
+class Interface
   attr_reader :report
   def final_report(report) # rubocop:disable Metrics/AbcSize
     if report[3][:warning].zero? && report[4][:error].zero?

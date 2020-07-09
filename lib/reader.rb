@@ -1,6 +1,6 @@
 require_relative 'offense.rb'
 
-Class File
+class File
     attr_reader :name :format :content
     attr_writer :file
     def initialize do
@@ -48,26 +48,26 @@ Class File
     end          
 end
 
-Class Report
-    attr_reader :file
-    attr_writer :report
+class Report
+attr_reader :file
+attr_writer :report
+  offenses_read
+    offense = Offenses.new
+    offenses = []
+    if offense
+        offense_counter += 1
+        offenses << offense
+    end    
+  report = Hash.new {offenses[offense]} << offenses
+  #report should be = { "Files inspected":0,"Offenses":0, "Path": ["array of paths"]}
+  
+  File.reader_info
+    html_counter = 0
+    js_counter = 0
+    json_counter = 0
+    geojson_counter = 0
+    while files in folder
       offenses_read
-        offense = Offenses.new
-        offenses = []
-        if offense
-            offense_counter += 1
-            offenses << offense
-        end    
-      report = Hash.new {offenses[offense]} << offenses
-      #report should be = { "Files inspected":0,"Offenses":0, "Path": ["array of paths"]}
-      
-      File.reader_info
-        html_counter = 0
-        js_counter = 0
-        json_counter = 0
-        geojson_counter = 0
-        while files in folder
-            offenses_read
-        else
-            return hash report
+    else
+      return hash report
 end
