@@ -1,8 +1,7 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require 'colorize'
-require 'colorized_string'
+require_relative './lib/interface.rb'
 
-start = Iinterface.new report.Offenses
-interface(start)
+start = Interface.new report.Offenses
+start

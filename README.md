@@ -2,61 +2,57 @@
 
 > Microverse Capstone project. This is a Code Linter developed with Ruby to keep your Leaflet maps out of trouble. Includes tests for HTML, JS, JSON and GEOJSON files to get the most out of this amazing library.
 
+Leaflet.js is an awesome library to create interactive web maps. It's so easy that errors are easy to fix. Leaflet-linter was designed to improve even more the experience of working with multiple layers and more complex maps by providing suggestions to style code and avoid future issues.
+
 ![Leaflet Linter in action](./app_screenshot.png)
 
 ## Main features of this linter
 
-- Identify layers out of layer control
-- Detect javascript inside HTML map page
-- Advise to use compressing tools for maps files
+- Identify layers out of layer control Leaflet API
+- Detect javascript inside HTML script tag in map page
+- Advise to use compressing tools for maps files, like mapshaper.org
 
 ## Built With
 
 - Ruby
     - Rubocop
-    - Gems:
+    - Gems
 - GitHub Actions
-
-## Live Demo
-
-[Live Demo Link](https://livedemo.com)
-
+- Javascript
+    - Leaflet.js
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
+Get a local copy of the linter.
 
+```
+git clone leaflet-linter.git
+```
 
-To get a local copy up and running follow these simple example steps.
+Move to repo folder and install needed gems
 
-### Prerequisites
+```
+cd leaflet-linter && bundle install
+```
 
-### Setup
+Sample test provided in ```tests``` folder.
 
-### Install
+If you want to work on something else, delete files in tests. Then move the files you want to analize to the tests folder.
 
-### Usage
+Then, on your terminal run the next instruction to scan files.
 
-### Run tests
+```
+main
+```
 
-### Deployment
-
-
+That's it, good luck with your maps!
 
 ## Authors
 
-👤 **Author1**
+👤 **Angel Mora**
 
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
-
-👤 **Author2**
-
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+- Github: [@angel-mora](https://github.com/githubhandle)
+- Linkedin: [angelmoram](https://linkedin.com/linkedinhandle)
 
 ## 🤝 Contributing
 
@@ -72,15 +68,13 @@ Give a ⭐️ if you like this project!
 
 - Hat tip to anyone whose code was used
 - Inspiration
-- etc
+- Thanks to Microverse and TSEs!
 
 ## 📝 License
 
 This project is [MIT](lic.url) licensed.
 
-## Classes
-
-TO-DO
+## TO-DO
 
 - Develop ```HTML <script> feature```
 - Inspiration: https://github.com/Dandush03/capstone-build-linter

@@ -1,5 +1,6 @@
 #spec/linter_spec.rb
-require_relative './bin/main'
+
+require_relative '../lib/interface.rb'
 
 describe '#final_report' do
   it "no offenses detected" do
@@ -9,7 +10,7 @@ describe '#final_report' do
                       { warning: 0 },
                       { error: 0 },
                       { offenses_details: nil }]
-    output = "Inspecting 3 files.\nNo offenses detected"                      
+    output = "Inspecting 3 files.\nNo offenses detected"
   expect(final_report(success_report)).to eql(output)
   end
   it "offenses detected" do
@@ -19,7 +20,7 @@ describe '#final_report' do
                           { warning: 1 },
                           { error: 2 },
                           { offenses_details: nil }]
-    output = "Inspecting 3 files.\nNo offenses detected"                      
+    output = "Inspecting 3 files.\nNo offenses detected"
   expect(final_report(all_offenses_report)).to eql(output)
   end
 end

@@ -22,11 +22,12 @@ Class Offenses
     end
   end
 
-  def offense_details(offense)
+  def offenses_details(offense)
     offenses_details = []
     total_offenses = 0
     if offense
-      offenses_details << String.new "#{path}: #{line_row}: #{ERROR}"
-    end #put offense to report
+      offenses_details << String.new "#{path}: #{error_line}: #{existing_offenses[Offense]}"
+      total_offenses += 1
+    end
   end
-end                 
+end

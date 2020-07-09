@@ -1,3 +1,5 @@
+require_relative 'offense.rb'
+
 Class File
     attr_reader :name :format :content
     attr_writer :file
@@ -47,8 +49,8 @@ Class File
 end
 
 Class Report
-    attr_reader :report
-    attr_writer :file
+    attr_reader :file
+    attr_writer :report
       offenses_read
         offense = Offenses.new
         offenses = []

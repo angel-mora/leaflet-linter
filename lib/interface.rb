@@ -1,3 +1,7 @@
+require_relative 'reader.rb'
+require 'colorize'
+require 'colorized_string'
+
 Class Interface
   attr_reader :report
   def final_report(report) # rubocop:disable Metrics/AbcSize
@@ -7,13 +11,9 @@ Class Interface
     elsif report[3][:warning].positive? || report[4][:error].positive?
       puts "Inspecting #{report[0][:files_inspected]} files"
       puts "#{report[1][:total_offenses]} offenses ".red + 'detected'
-      # for later p offense_details.each
+      puts report[5][:offenses_details]
     elsif report[0][:files_inspected].zero?
       puts 'Please add some files'
     end
   end
 end
-# offenses_found = interface.new "#{files_counter} inspected. #{offenses_counter} offenses detected.\n
-#                                 #{path}: #{error_line}: #{existing_offenses[Offense]}" # use another method to do this
-
-# sucess = "#{files_counter} inspected. No offense detected."
