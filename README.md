@@ -4,6 +4,8 @@
 
 Leaflet.js is an awesome library to create interactive web maps. It's so easy that errors are easy to fix. Leaflet-linter was designed to improve even more the experience of working with multiple layers and more complex maps by providing suggestions to style code and avoid future issues.
 
+This linter must be used just after W3 HTML Validator and ESLint. It's not a substitute but a complement of them.
+
 ![Leaflet Linter in action](./app_screenshot.png)
 
 ## Main features of this linter
@@ -51,8 +53,8 @@ That's it, good luck with your maps!
 
 👤 **Angel Mora**
 
-- Github: [@angel-mora](https://github.com/githubhandle)
-- Linkedin: [angelmoram](https://linkedin.com/linkedinhandle)
+- Github: [@angel-mora](https://github.com/angel-mora)
+- Linkedin: [angelmoram](https://linkedin.com/angelmoram)
 
 ## 🤝 Contributing
 
@@ -66,9 +68,8 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- Thanks to Microverse and TSEs!
+- To all GIS enthusiasts!
+- Thanks to Microverse and TSEs
 
 ## 📝 License
 
@@ -76,5 +77,4 @@ This project is [MIT](lic.url) licensed.
 
 ## TO-DO
 
-- Develop ```HTML <script> feature```
 - Inspiration: https://github.com/Dandush03/capstone-build-linter

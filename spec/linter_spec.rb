@@ -19,7 +19,7 @@ describe Interface do
   end
 end
 
-describe Interface do  
+describe Interface do
   context '#final_report' do
     let(:all_offenses_report) do
       [{ files_inspected: 5 },

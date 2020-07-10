@@ -2,18 +2,29 @@ require_relative 'offense.rb'
 
 class File
     attr_reader :name :format :content
-    attr_writer :file
+    attr_writer :formats_report
     def initialize do
-      # eval if any html,js,json or geojson             
+      # eval if any html,js,json or geojson 
+      if format next to dot is formats[any]
+        formats.counter[any] += 1
+        paths << file            
     end
 
     def reader do
+      formats_report = {}
       file.each do |format|
           case format
           when html
-              #loading and processing method
+            # <script ...></script>
+            report[offenses_details] << ERROR[0][html]
           when js
-              #loading and processing method
+            #if L.control.layers(...).addTo(...)
+              # L. "..." addTo(...).true?
+                # if "..." != control.layers( && L.control.layers
+                # offenses[...] << counter += 1, offense [:js]
+                # end
+            #else next
+            #end      
           when json
               #loading and processing method
           when geojson
@@ -48,9 +59,9 @@ class File
     end          
 end
 
-class Report
-attr_reader :file
-attr_writer :report
+class FinalReport
+attr_reader :format_report :offenses_report
+attr_writer :offenses_report
   offenses_read
     offense = Offenses.new
     offenses = []
@@ -58,16 +69,12 @@ attr_writer :report
         offense_counter += 1
         offenses << offense
     end    
-  report = Hash.new {offenses[offense]} << offenses
+  offenses_report = Hash.new {offenses[offense]} << offenses
   #report should be = { "Files inspected":0,"Offenses":0, "Path": ["array of paths"]}
   
   File.reader_info
-    html_counter = 0
-    js_counter = 0
-    json_counter = 0
-    geojson_counter = 0
     while files in folder
       offenses_read
     else
-      return hash report
+      return offenses_report
 end
