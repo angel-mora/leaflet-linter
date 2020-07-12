@@ -1,40 +1,67 @@
-ERROR = [{ js: 'Layer out of layer.control in line' },
-         { html: 'Content inside script detected.
-            Add src to script tag and relocate code.
-            Example: /js/script_relocated.js' }].freeze
+# frozen_string_literal: true
 
-WARNING = 'The file is bigger than 5mb. Compression suggested. Try https://mapshaper.org/'
+# require_relative './interface.rb'
+require_relative 'libraries.rb'
 
-test_report = [{ files_inspected: 3 },
-{ total_offenses: 2 },
-{ path: 'index.html' },
-{ warning: 1 },
-{ error: 3 },
-{ offenses_details: nil }]
-
+# Offenses report generator
 class Offenses
+  attr_reader :errors, :warnings
   attr_writer :report
-  def checker
-    err_counter = 0
-    warning_counter = 0
-    existing_offenses = { "JS file Error": "Layer out of layer.control in line X", "JS/JSON/GEOJSON file Warning":"The file is bigger than 5mb. Compression suggested. Try https://mapshaper.org/", "HTML Error": "Content inside script detected. Please add src attribute to HTML tag and relocate JS content inside another file. Example: /js/script_relocated.js" }
-    case offenses_read
-    when errors
-        report[errors] << existing_offenses["Example kind of error"]
-        << error_counter
-    when warnings
-        report[warnings] << existing_offenses["Example kind of warning"]
-        << warning_counter
-    else success = True
-    end
+
+  include ErrorsLibrary
+  include WarningsLibrary
+  def initialize
+    @errors = ERRORS
+    @warnings = WARNINGS
   end
 
-  def offenses_details(offense)
-    offenses_details = []
-    total_offenses = 0
-    if offense
-      offenses_details << String.new "#{path}: #{error_line}: #{existing_offenses[Offense]}"
-      total_offenses += 1
-    end
+  #   def offenses_details(offense)
+  #     offenses_details = []
+  #     total_offenses = 0
+  #     if offense
+  #       offenses_details << String.new "#{path}: #{error_line}: #{existing_offenses[Offense]}"
+  #       total_offenses += 1
+  #     end
+  #   end
+  # end
+
+  #  offenses checker = if Reader.offenses?
+  #   add offenses to offenses_report
+  #   count offenses
+  #   push paths to path
+  #   count errors and warnings
+
+  def test
+    [{ files_inspected: 3 },
+     { total_offenses: 3 },
+     { path: 'index.html' },
+     { warning: 1 },
+     { error: 3 },
+     { offenses_details:
+       [errors_printer,
+        warnings_printer] }]
   end
+
+  def offenses_report_generator
+    offenses_report = [
+      { files_inspected: 0 }, # from Reader
+      { total_offenses: 0 },
+      { path: [] },
+      { warning: 0 },
+      { error: 0 },
+      { offenses_details: [
+          # if errors[symbol]
+          # errors_printer,
+          # if warnings[:symbol]
+          # warnings_printer
+        # end
+        #end
+          ] }]
+  end
+  # def checker
+  #   total_offenses = 0
+  #   files inspected = 0
+  #   path = []
+  #     offenses
+  # end
 end

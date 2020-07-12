@@ -1,7 +1,10 @@
 #!/usr/bin/env ruby
 # frozen_string_literal: true
 
-require_relative './lib/interface.rb'
+require_relative '../lib/interface.rb'
 
-start = Interface.new report.Offenses
-start
+interface = Interface.new
+offenses_instance = Offenses.new
+report = offenses_instance.test
+
+interface.final_report(report)

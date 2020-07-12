@@ -3,6 +3,7 @@
 # require_relative 'reader.rb'
 require 'colorize'
 require 'colorized_string'
+require_relative './offense.rb'
 
 # Print report to console
 class Interface
@@ -14,7 +15,7 @@ class Interface
 
   def no_offenses
     puts 'No offenses '.green + 'detected'
-  end  
+  end
 
   def offenses_detected(report)
     puts "#{report[1][:total_offenses]} offenses ".red + 'detected'
@@ -51,12 +52,9 @@ class Interface
   end
 end
 
-test_report = [{ files_inspected: 3 },
-{ total_offenses: 2 },
-{ path: 'index.html' },
-{ warning: 1 },
-{ error: 3 },
-{ offenses_details: nil }]
+# call puts offenses.test.offenses_details
 
-interface = Interface.new
-interface.final_report(test_report)
+# x = offenses_instance.test[5][:offenses_details][0]
+# puts x
+
+# refactor test array to be more accessible
