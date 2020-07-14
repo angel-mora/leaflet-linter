@@ -7,54 +7,43 @@ require_relative './offense.rb'
 
 # Print report to console
 class Interface
-  attr_reader :report
+  attr_reader :final_report
 
-  def inspecting_files(report)
-    puts "Inspecting #{report[0][:files_inspected]} files"
+  def inspecting_files(final_report)
+    puts "Inspecting #{final_report[:initial_report][:total_files]} files"
   end
 
   def no_offenses
     puts 'No offenses '.green + 'detected'
   end
 
-  def offenses_detected(report)
-    puts "#{report[1][:total_offenses]} offenses ".red + 'detected'
+  def offenses_detected(final_report)
+    puts "#{final_report[:initial_report][:total_offenses]} offenses ".red + 'detected'
   end
 
-  def offenses_list(report)
-    puts report[5][:offenses_details]
+  def offenses_list(final_report)
+    puts final_report[:offenses_report][:offense_item]
   end
 
-  def no_offenses?(report)
-    report[3][:warning].zero? && report[4][:error].zero?
+  def no_offenses?(final_report)
+    final_report[:initial_report][:total_offenses].zero?
   end
 
-  def offenses_detected?(report)
-    report[3][:warning].positive? || report[4][:error].positive?
-  end
-
-  def no_files?(report)
+  def no_files?(final_report)
     add_files = puts 'Please add some files'
     unknown = puts 'Unknown error'
-    report[0][:files_inspected].zero? ? add_files : unknown
+    final_report[0][:files_inspected].zero? ? add_files : unknown
   end
 
-  def final_report(report)
-    if no_offenses?(report)
-      inspecting_files(report)
+  def console_output(final_report)
+    if no_offenses?(final_report)
+      inspecting_files(final_report)
       no_offenses
-    elsif offenses_detected?(report)
-      inspecting_files(report)
-      offenses_detected(report)
-      offenses_list(report)
-    elsif no_files?(report)
+    elsif offenses_detected?(final_report)
+      inspecting_files(final_report)
+      offenses_detected(final_report)
+      offenses_list(final_report)
+    else puts 'Unknown error'.orange
     end
   end
 end
-
-# call puts offenses.test.offenses_details
-
-# x = offenses_instance.test[5][:offenses_details][0]
-# puts x
-
-# refactor test array to be more accessible

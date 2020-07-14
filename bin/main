@@ -2,9 +2,24 @@
 # frozen_string_literal: true
 
 require_relative '../lib/interface.rb'
+require_relative '../lib/reader.rb'
 
-interface = Interface.new
-offenses_instance = Offenses.new
-report = offenses_instance.test
+initial_report = Reader.new
+# interface = Interface.new
+# offenses_instance = Offenses.new
+# report = offenses_instance.test
 
-interface.final_report(report)
+# interface.final_report(report)
+
+final_report = { initial_report:
+                  { files_inspected: [],
+                    total_files: 0,
+                    offenses?: false,
+                    total_offenses: 0 },
+                 offenses_report: #per file
+                  { offense_item:
+                    { path: '',
+                      offense_row: 0,
+                      format: '',
+                      offense_description: '' } }
+               }

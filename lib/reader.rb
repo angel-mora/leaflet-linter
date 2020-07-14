@@ -4,14 +4,16 @@ require 'open-uri'
 require 'nokogiri'
 
 class Reader
+  include Offenses
     attr_reader :name, :format, :content
-    attr_writer :formats_report
+    attr_writer :initial_report
+
     def initialize
-      # eval if any html,js,json or geojson 
-      if format next to dot is formats[any]
-        formats.counter[any] += 1
-        paths << file
-      end
+      initial_report = Hash.new { files_inspected: [],
+                                  total_files: 0, # files_inspected.length
+                                  offenses?: false,
+                                  total_offenses: 0 }
+      @initial_report = initial_report
     end
 
     def parse_html
@@ -24,7 +26,7 @@ class Reader
           if array[i].text.empty? # each array[i].text all empty?
               next
           else
-            p "Not valid" # add ERROR:html to report
+            Offenses:: # add ERROR:html to report
           end    
       end
       report[offenses_details] << ERROR[0][html]
@@ -46,24 +48,73 @@ class Reader
       # file > 5mb? ? report_array[i]_offense
     end  
 
-    def DirScanner
-      formats_report = {}
-      file.each do |format|
-          case format
-          when html
-            parse_html
-            html_offenses_finder
-          when js, json, geojson
-            parse_javascript
-            javascript_offenses_finder
+    def folder_scanner
+      Dir.glob('*/*.*') do |file|
+        case File.extname(file)
+        when '.html'
+          puts File.expand_path(file) # to initial_report[:files_inspected]
+        when '.js'
+          puts File.expand_path(file)
+          file_read = File.read(file).split
+          for line in file_read
+            line.match?(javascript_offenses_finder)
+            more_than_5mb? = File.size > 40000000 ? true : false
           end
+        when '.json'
+          puts File.expand_path(file)
+        when '.geojson'
+          puts File.expand_path(file)
+        else
+          puts File.expand_path(file)
+        end
+      end
+    end
+
+    def files_scanner #push offense_item to offenses_report[:offense_item]
+      total_lines = File.foreach(file).count do |offense_item|
+        offense_item = Hash.new { path: '',
+                                  offense_row: 0,
+                                  format: '',
+                                  offense_description: '' }
+        case file.format
+        when '*.html'
+          parse_html
+          html_offenses_finder
+          push result to new offense_item
+        when '*.js'
+          parse_javascript
+          javascript_offenses_finder
+          push result to new offense_item
+        when '*.json'
+          # push path to initial_report[:files_inspected]
+        when '*.geojson'
+          # push path to initial_report[:files_inspected]
+        end  
       end
     end
 end
 
 class FinalReport
-attr_reader :format_report :offenses_report
-attr_writer :offenses_report
+  attr_reader :initial_report, :offenses_report
+  attr_writer :final_report
+  
+  def initialize
+    final_report = Hash.new { initial_report:
+                                {
+                                  files_inspected: [],
+                                  total_files: 0,
+                                  offenses?: false,
+                                  total_offenses: 0
+                                },
+                              offense_item: #per file
+                                {
+                                  path: '',
+                                  offense_row: 0,
+                                  format: '',
+                                  offense_description: ''
+                                } }
+  end  
+
   offenses_read
     offense = Offenses.new
     offenses = []
