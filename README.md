@@ -75,6 +75,10 @@ Give a ⭐️ if you like this project!
 
 This project is [MIT](lic.url) licensed.
 
-## TO-DO
+## UPDATE
 
-- Inspiration: https://github.com/Dandush03/capstone-build-linter
+- Regex for js search inside file
+- Need to finish Rspec tests
+- How to call all the program from main?
+
+Learning a lot, suggesting feedback to complete project and willing to request capstone again until achive mastery on time.

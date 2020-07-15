@@ -3,131 +3,125 @@ require_relative 'offense.rb'
 require 'open-uri'
 require 'nokogiri'
 
+# Scan for errors in files
 class Reader
   include Offenses
-    attr_reader :name, :format, :content
-    attr_writer :initial_report
+  attr_reader :name, :format, :content
+  attr_writer :initial_report, :offenses_report
 
-    def initialize
-      initial_report = Hash.new { files_inspected: [],
-                                  total_files: 0, # files_inspected.length
-                                  offenses?: false,
-                                  total_offenses: 0 }
-      @initial_report = initial_report
-    end
+  def initialize(initial_report, offenses_report)
+  @initial_report = initial_report
+  @offenses_report = offenses_report
+  initial_report = { files_inspected: [''],
+                     total_files: 0,
+                     offenses?: false,
+                     total_offenses: 0 }
+  offenses_report = {}
+  end
 
-    def parse_html
-      doc = File.open('./tests/index.html') { |f| Nokogiri::HTML(f) }
+  def final_report
+    final_report = {}
+    final_report[:initial_report] = @initial_report 
+    final_report[:offenses_report] = @offenses_report
+  end
+
+  def offense_item # make it a proc
+    offense_item = {
+      path: '',
+      offense_row: 0,
+      format: '',
+      offense_description: '' }
+  end
+
+  def parse_html
+    parse_html = File.open('./tests/index.html') { |f| Nokogiri::HTML(f) }
+  end
+
+  def html_offenses_finder
+    array = parse_html.css('script')
+    array.size.times do |i|
+    print_offense = p 'Offense detected'
+    # array[i].text.empty? ? next : print_offense
+      # offenses_report[:offense_item] << offense_item.new
     end
-    
-    def html_offenses_finder
-      array = parse_html.css('script')
-      array.size.times do |i|
-          if array[i].text.empty? # each array[i].text all empty?
-              next
-          else
-            Offenses:: # add ERROR:html to report
-          end    
+  end
+
+  def fill_item_description # make it a proc
+    errors_keys = offenses_library[:errors].keys # [ 'js', 'html' ]
+    warnings_keys = offenses_library[:warnings].keys # [ 'js', 'json', 'geojson' ]
+    errors_values = offenses_library[:errors].values
+    warnings_values = offenses_library[:warnings].values
+      case errors_keys.include?(offense_item[:format])
+      when errors
+        offense_item[:offense_description] << offenses_library[:errors][:format]
+      when warnings
+        offense_item[:offense_description] << offenses_library[:warnings]  
       end
-      report[offenses_details] << ERROR[0][html]
-    end
+  end
 
-    def parse_javascript
-      # empty
-    end
+  def format_relation
+    offense_types = [offenses_library[:errors],offenses_library[:warnings]]
 
-    def javascript_offenses_finder
-      #if L.control.layers(...).addTo(...)
-              # L. "..." addTo(...).true?
-                # if "..." != control.layers( && L.control.layers
-                # offenses[...] << counter += 1, offense [:js]
-                # end
-      #else next
-      #end
-      # if geojson advise to rename
-      # file > 5mb? ? report_array[i]_offense
-    end  
-
-    def folder_scanner
-      Dir.glob('*/*.*') do |file|
-        case File.extname(file)
-        when '.html'
-          puts File.expand_path(file) # to initial_report[:files_inspected]
-        when '.js'
-          puts File.expand_path(file)
-          file_read = File.read(file).split
-          for line in file_read
-            line.match?(javascript_offenses_finder)
-            more_than_5mb? = File.size > 40000000 ? true : false
-          end
-        when '.json'
-          puts File.expand_path(file)
-        when '.geojson'
-          puts File.expand_path(file)
-        else
-          puts File.expand_path(file)
-        end
-      end
-    end
-
-    def files_scanner #push offense_item to offenses_report[:offense_item]
-      total_lines = File.foreach(file).count do |offense_item|
-        offense_item = Hash.new { path: '',
-                                  offense_row: 0,
-                                  format: '',
-                                  offense_description: '' }
-        case file.format
-        when '*.html'
-          parse_html
-          html_offenses_finder
-          push result to new offense_item
-        when '*.js'
-          parse_javascript
-          javascript_offenses_finder
-          push result to new offense_item
-        when '*.json'
-          # push path to initial_report[:files_inspected]
-        when '*.geojson'
-          # push path to initial_report[:files_inspected]
-        end  
+    offense_types.each do |key, value|
+      if key == library_vs_report
+        offense_item[:offense_description] << value # verify this
+      else
+        next
       end
     end
-end
+  end
 
-class FinalReport
-  attr_reader :initial_report, :offenses_report
-  attr_writer :final_report
+  def l_control_conflict?
+    #if L.control.layers(...).addTo(...)
+      # L. "..." addTo(...).true?
+      # if "..." != control.layers( && L.control.layers
+      # offenses[...] << counter += 1, offense [:js]
+      # end
+    #else next
+  end
   
-  def initialize
-    final_report = Hash.new { initial_report:
-                                {
-                                  files_inspected: [],
-                                  total_files: 0,
-                                  offenses?: false,
-                                  total_offenses: 0
-                                },
-                              offense_item: #per file
-                                {
-                                  path: '',
-                                  offense_row: 0,
-                                  format: '',
-                                  offense_description: ''
-                                } }
-  end  
-
-  offenses_read
-    offense = Offenses.new
-    offenses = []
-    if offense
-        offense_counter += 1
-        offenses << offense
-    end    
-  offenses_report = Hash.new {offenses[offense]} << offenses
-  #report should be = { "Files inspected":0,"Offenses":0, "Path": ["array of paths"]}
+  def more_than_5mb?(file)
+    f_size = File.size(file)
+    f_size > 5_242_880 ? true : false
+  end
   
-  File.reader_info
-    while files in folder
-      offenses_read
-    else
-      return offenses_report
+  def folder_scanner #push offense_item to offenses_report[:offense_item]
+    files_inspected = []
+    Dir.glob('*/*.*') do |file|
+      case File.extname(file)
+      when '.html'
+        files_inspected.push(File.expand_path(file))
+        html_offenses_finder
+      when '.js'
+        files_inspected.push(File.expand_path(file))
+        more_than_5mb?(file)
+        l_control_conflict?
+      when '.geojson'
+        files_inspected.push(File.expand_path(file))
+        more_than_5mb?(file)
+      else
+        next
+      end
+    end
+    puts files_inspected
+  end
+
+  def files_scanner 
+    total_lines = File.foreach(file).count do |offense_item|
+      offense_item.new
+      case File.format
+      when '*.html'
+        parse_html
+        html_offenses_finder
+      when '*.js'
+        parse_javascript
+        javascript_offenses_finder
+        # push result to new offense_item
+      when '*.json'
+        # push path to initial_report[:files_inspected]
+      when '*.geojson'
+        # push path to initial_report[:files_inspected]
+      end
+    end
+  end
 end
