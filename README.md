@@ -74,11 +74,3 @@ Give a ⭐️ if you like this project!
 ## 📝 License
 
 This project is [MIT](lic.url) licensed.
-
-## UPDATE
-
-- Regex for js search inside file
-- Need to finish Rspec tests
-- How to call all the program from main?
-
-Learning a lot, suggesting feedback to complete project and willing to request capstone again until achive mastery on time.
